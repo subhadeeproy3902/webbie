@@ -14,20 +14,24 @@ export default function Hero() {
 
   const handleRedirect = (url: string) => {
     setLoading(true);
-    // Validate the URL
-    if (!url) {
-      setError("Please enter a URL");
-      return;
-    }
-    // Validate the URL format with a regex
-    const urlRegex = /^(http|https):\/\/[^ "]+$/;
-    if (!urlRegex.test(url)) {
-      setError("Please enter a valid URL");
-      return;
-    }
-    // Redirect to the URL
-    router.push(`/${url}`);
-    setLoading(false);
+    setTimeout(() => {
+      // Validate the URL
+      if (!url) {
+        setError("Please enter a URL");
+        setLoading(false);
+        return;
+      }
+      // Validate the URL format with a regex
+      const urlRegex = /^(http|https):\/\/[^ "]+$/;
+      if (!urlRegex.test(url)) {
+        setError("Please enter a valid URL");
+        setLoading(false);
+        return;
+      }
+      // Redirect to the URL
+      router.push(`/${url}`);
+      setLoading(false);
+    }, 2000);
   };
 
   return (
@@ -67,17 +71,11 @@ export default function Hero() {
             className="bg-[#b66dff] hover:bg-[#a55aff] text-white px-8"
             onClick={() => handleRedirect(url)}
           >
-            Chat Now {loading && "..."}
+            {loading ? "Loading..." : "Chat Now"}
           </Button>
         </div>
 
-        {
-          error && (
-            <div className="bg-red-500 text-white p-2 rounded-md mb-4">
-              {error}
-            </div>
-          )
-        }
+        {error && <div className="text-red-500 -mt-10 pb-8">{error}</div>}
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
           {[
