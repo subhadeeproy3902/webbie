@@ -3,6 +3,8 @@ import { ragchat } from "@/lib/rag-chat";
 import { redis } from "@/lib/redis";
 import { cookies } from "next/headers";
 
+export const maxDuration = 10
+
 interface PageProps {
   params: {
     url: string | string[] | undefined;
