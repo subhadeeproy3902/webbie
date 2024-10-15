@@ -10,8 +10,10 @@ export default function Hero() {
   const router = useRouter();
   const [url, setUrl] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleRedirect = (url: string) => {
+    setLoading(true);
     // Validate the URL
     if (!url) {
       setError("Please enter a URL");
@@ -25,6 +27,7 @@ export default function Hero() {
     }
     // Redirect to the URL
     router.push(`/${url}`);
+    setLoading(false);
   };
 
   return (
@@ -64,7 +67,7 @@ export default function Hero() {
             className="bg-[#b66dff] hover:bg-[#a55aff] text-white px-8"
             onClick={() => handleRedirect(url)}
           >
-            Chat Now
+            Chat Now {loading && "..."}
           </Button>
         </div>
 
