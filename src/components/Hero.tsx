@@ -28,8 +28,7 @@ export default function Hero() {
         setLoading(false);
         return;
       }
-      // Redirect to the URL
-      router.push(`/${url}`);
+      window.location.href = "/" + url;
       setLoading(false);
     }, 2000);
   };
@@ -61,7 +60,7 @@ export default function Hero() {
         </p>
         <div className="flex max-w-2xl mx-auto mb-16">
           <Input
-            type="text"
+            type="url"
             placeholder="Enter a URL"
             value={url}
             onChange={(e) => setUrl(e.target.value)}
